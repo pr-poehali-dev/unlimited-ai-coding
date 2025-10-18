@@ -35,7 +35,6 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         }
     
     try:
-        import httpx
         from openai import OpenAI
         
         body_data = json.loads(event.get('body', '{}'))
