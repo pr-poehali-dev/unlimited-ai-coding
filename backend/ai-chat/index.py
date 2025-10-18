@@ -35,7 +35,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         }
     
     try:
-        import openai
+        from openai import OpenAI
         
         body_data = json.loads(event.get('body', '{}'))
         user_message = body_data.get('message', '')
@@ -64,10 +64,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'body': json.dumps({'error': 'OpenAI API key not configured'})
             }
         
-        client = openai.OpenAI(
-            api_key=api_key,
-            base_url="https://api.openai.com/v1"
-        )
+        client = OpenAI(api_key=api_key)
         
         messages = [
             {
