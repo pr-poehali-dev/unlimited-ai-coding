@@ -65,8 +65,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'body': json.dumps({'error': 'OpenAI API key not configured'})
             }
         
-        http_client = httpx.Client()
-        client = OpenAI(api_key=api_key, http_client=http_client)
+        client = OpenAI(
+            api_key=api_key,
+            base_url="https://api.vsegpt.ru/v1"
+        )
         
         messages = [
             {
