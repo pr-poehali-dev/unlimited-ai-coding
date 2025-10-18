@@ -35,6 +35,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         }
     
     try:
+        import httpx
         from openai import OpenAI
         
         body_data = json.loads(event.get('body', '{}'))
@@ -64,7 +65,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'body': json.dumps({'error': 'OpenAI API key not configured'})
             }
         
-        client = OpenAI(api_key=api_key)
+        http_client = httpx.Client()
+        client = OpenAI(api_key=api_key, http_client=http_client)
         
         messages = [
             {
